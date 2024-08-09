@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidVacations", "ValidVacations\ValidVacations.csproj", "{B2FB308C-0B3C-47C2-8E3A-7856A3A76DCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidVacation.Contracts", "ValidVacation.Contracts\ValidVacation.Contracts.csproj", "{050000B9-66C8-4D9E-80F6-52E1CF6B3BCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{A1A5ED96-A7C9-41A2-B53A-363D95CF1B5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vacation", "Vacation", "{1BD38E69-93BF-47AC-BA2D-317371BA641A}"
+	ProjectSection(SolutionItems) = preProject
+		Requests\Vacation\CreateVacation.http = Requests\Vacation\CreateVacation.http
+		Requests\Vacation\DeleteVacation.http = Requests\Vacation\DeleteVacation.http
+		Requests\Vacation\GetVacation.http = Requests\Vacation\GetVacation.http
+		Requests\Vacation\UpsertVacation.http = Requests\Vacation\UpsertVacation.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{7443C2AC-63C0-4FB0-A9C1-4FAF77FED575}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\Api.md = Docs\Api.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customer", "Customer", "{761FE965-7F26-4E11-B809-E0C1D6DF7699}"
+	ProjectSection(SolutionItems) = preProject
+		Requests\Customer\CreateCustomer.http = Requests\Customer\CreateCustomer.http
+		Requests\Customer\DeleteCustomer.http = Requests\Customer\DeleteCustomer.http
+		Requests\Customer\GetCustomer.http = Requests\Customer\GetCustomer.http
+		Requests\Customer\UpsertCustomer.http = Requests\Customer\UpsertCustomer.http
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2FB308C-0B3C-47C2-8E3A-7856A3A76DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2FB308C-0B3C-47C2-8E3A-7856A3A76DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2FB308C-0B3C-47C2-8E3A-7856A3A76DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2FB308C-0B3C-47C2-8E3A-7856A3A76DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050000B9-66C8-4D9E-80F6-52E1CF6B3BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050000B9-66C8-4D9E-80F6-52E1CF6B3BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050000B9-66C8-4D9E-80F6-52E1CF6B3BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050000B9-66C8-4D9E-80F6-52E1CF6B3BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BD38E69-93BF-47AC-BA2D-317371BA641A} = {A1A5ED96-A7C9-41A2-B53A-363D95CF1B5C}
+		{761FE965-7F26-4E11-B809-E0C1D6DF7699} = {A1A5ED96-A7C9-41A2-B53A-363D95CF1B5C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09955F9C-E776-4AA8-9401-C400F527A69E}
+	EndGlobalSection
+EndGlobal

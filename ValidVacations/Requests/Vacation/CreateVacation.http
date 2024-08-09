@@ -1,0 +1,11 @@
+POST http://localhost:5048/vacations
+Content-Type: application/json
+
+{
+    "title": "Japan Railroad-Adventure: City Hopping im Shinkansen",
+    "description": "Following Train Tracks: Von Tokyo nach Hiroshima!",
+    "startDate": "2025-04-08",
+    "endDate": "2025-04-22",
+    "length": "14",
+    "price": "189900"
+}
