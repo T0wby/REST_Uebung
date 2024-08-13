@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowbyJobs.Contracts", "TowbyJobs.Contracts\TowbyJobs.Contracts.csproj", "{7186B96B-4699-43E9-9F3A-1D462AD58EC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowbyJobs", "TowbyJobs\TowbyJobs.csproj", "{949B48B5-EC66-482A-BFA8-91A04AF34E04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7186B96B-4699-43E9-9F3A-1D462AD58EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7186B96B-4699-43E9-9F3A-1D462AD58EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7186B96B-4699-43E9-9F3A-1D462AD58EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7186B96B-4699-43E9-9F3A-1D462AD58EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{949B48B5-EC66-482A-BFA8-91A04AF34E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949B48B5-EC66-482A-BFA8-91A04AF34E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949B48B5-EC66-482A-BFA8-91A04AF34E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949B48B5-EC66-482A-BFA8-91A04AF34E04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

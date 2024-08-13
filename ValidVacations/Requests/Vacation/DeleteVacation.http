@@ -1,3 +1,0 @@
-@id = c76a35da-b48e-4368-806c-20e8ce8f8346
-
-DELETE http://localhost:5048/vacations/{{id}}
