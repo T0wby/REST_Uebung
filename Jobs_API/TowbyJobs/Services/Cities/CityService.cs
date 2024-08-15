@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using TowbyJobs.Data;
+using TowbyJobs.Models;
 using TowbyJobs.ServiceErrors;
 
 namespace TowbyJobs.Services.Cities
@@ -30,6 +31,19 @@ namespace TowbyJobs.Services.Cities
             _context.Cities.Remove(city);
             _context.SaveChanges();
             return Result.Deleted;
+        }
+
+        public ErrorOr<List<City>> GetCities(int number)
+        {
+            if (number <= 0)
+            {
+                return Errors.Job.OutOfScope;
+            }
+
+            if (number > _context.Cities.Count()) number = _context.Cities.Count();
+
+            var cities = _context.Cities.Take(number).ToList();
+            return cities;
         }
 
         public ErrorOr<Models.City> GetCity(int id)

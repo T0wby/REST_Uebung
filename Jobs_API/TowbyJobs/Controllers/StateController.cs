@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
+using TowbyJobs.Contracts.Job;
 using TowbyJobs.Contracts.State;
 using TowbyJobs.Models;
 using TowbyJobs.Services.States;
@@ -42,6 +43,16 @@ namespace TowbyJobs.Controllers
                 errors => Problem(errors));
         }
 
+        [HttpGet("getStates/{count:int}")]
+        public IActionResult GetStateList(int count)
+        {
+            var getStateResult = _stateService.GetStates(count);
+
+            return getStateResult.Match(
+                states => Ok(MapStateListResponse(states)),
+                errors => Problem(errors));
+        }
+
 
         [HttpPut("{id:int}")]
         public IActionResult UpsertState(int id, UpsertStateRequest request)
@@ -81,8 +92,24 @@ namespace TowbyJobs.Controllers
             return new StateResponse(
                             state.State_Id,
                             state.Name,
-                            DateTime.UtcNow
+                            state.LastTimeUpdated
                             );
+        }
+        private static List<StateResponse> MapStateListResponse(List<State> states)
+        {
+            List<StateResponse> responses = new List<StateResponse>();
+
+            foreach (var state in states)
+            {
+                responses.Add(
+                    new StateResponse(
+                            state.State_Id,
+                            state.Name,
+                            state.LastTimeUpdated
+                            ));
+            }
+
+            return responses;
         }
 
         private static ErrorOr<State> MapState(CreateStateRequest request, int id)

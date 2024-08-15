@@ -1,7 +1,6 @@
 ﻿using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using TowbyJobs.Contracts.Country;
-using TowbyJobs.Data;
 using TowbyJobs.Models;
 using TowbyJobs.Services.Countries;
 
@@ -40,6 +39,16 @@ namespace TowbyJobs.Controllers
 
             return getCountryResult.Match(
                 job => Ok(MapCountryResponse(job)),
+                errors => Problem(errors));
+        }
+
+        [HttpGet("getCountries/{count:int}")]
+        public IActionResult GetCountryList(int count)
+        {
+            var getCountryResult = _countryService.GetCountries(count);
+
+            return getCountryResult.Match(
+                countries => Ok(MapCountryListResponse(countries)),
                 errors => Problem(errors));
         }
 
@@ -83,8 +92,25 @@ namespace TowbyJobs.Controllers
                             country.Country_Id,
                             country.Name,
                             country.Code,
-                            DateTime.UtcNow
+                            country.LastTimeUpdated
                             );
+        }
+        private static List<CountryResponse> MapCountryListResponse(List<Country> countries)
+        {
+            List<CountryResponse> responses = new List<CountryResponse>();
+
+            foreach (var country in countries)
+            {
+                responses.Add(
+                new CountryResponse(
+                    country.Country_Id,
+                    country.Name,
+                    country.Code,
+                    country.LastTimeUpdated
+                ));
+            }
+
+            return responses;
         }
 
         private static ErrorOr<Country> MapCountry(CreateCountryRequest request, int id)

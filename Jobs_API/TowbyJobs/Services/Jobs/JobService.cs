@@ -39,6 +39,19 @@ namespace TowbyJobs.Services.Jobs
             return job == null ? Errors.Job.NotFound : job;
         }
 
+        public ErrorOr<List<Job>> GetJobs(int number)
+        {
+            if (number <= 0)
+            {
+                return Errors.Job.OutOfScope;
+            }
+
+            if(number > _context.Jobs.Count()) number = _context.Jobs.Count();
+
+            var jobs = _context.Jobs.Take(number).ToList();
+            return jobs;
+        }
+
         public ErrorOr<UpsertedJobResult> UpsertJob(Job job)
         {
             var tempJ = _context.Jobs.Find(job.Job_Id);

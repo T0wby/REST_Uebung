@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using TowbyJobs.Contracts.City;
+using TowbyJobs.Contracts.Company;
 using TowbyJobs.Models;
 using TowbyJobs.Services.Cities;
 
@@ -42,6 +43,15 @@ namespace TowbyJobs.Controllers
                 errors => Problem(errors));
         }
 
+        [HttpGet("getCities/{count:int}")]
+        public IActionResult GetCityList(int count)
+        {
+            var getCityResult = _cityService.GetCities(count);
+
+            return getCityResult.Match(
+                cities => Ok(MapCityListResponse(cities)),
+                errors => Problem(errors));
+        }
 
         [HttpPut("{id:int}")]
         public IActionResult UpsertCity(int id, UpsertCityRequest request)
@@ -82,8 +92,25 @@ namespace TowbyJobs.Controllers
                             city.City_Id,
                             city.Name,
                             city.AreaCode,
-                            DateTime.UtcNow
+                            city.LastTimeUpdated
                             );
+        }
+        private static List<CityResponse> MapCityListResponse(List<City> cities)
+        {
+            List<CityResponse> responses = new List<CityResponse>();
+
+            foreach (var city in cities)
+            {
+                responses.Add(
+                new CityResponse(
+                        city.City_Id,
+                        city.Name,
+                        city.AreaCode,
+                        city.LastTimeUpdated
+                        ));
+            }
+
+            return responses;
         }
 
         private static ErrorOr<City> MapCity(CreateCityRequest request, int id)

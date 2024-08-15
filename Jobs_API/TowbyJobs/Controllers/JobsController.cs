@@ -4,18 +4,17 @@ using TowbyJobs.Data;
 using TowbyJobs.Services.Jobs;
 using TowbyJobs.Contracts.Job;
 using TowbyJobs.Models;
+using System.Collections.Generic;
 
 namespace TowbyJobs.Controllers
 {
     public class JobsController : ApiController
     {
         private readonly IJobService _jobService;
-        private readonly AppDbContext _context;
 
-        public JobsController(IJobService jobService, AppDbContext context)
+        public JobsController(IJobService jobService)
         {
             _jobService = jobService;
-            _context = context;
         }
 
         [HttpPost()]
@@ -28,7 +27,6 @@ namespace TowbyJobs.Controllers
                 return Problem(job.Errors);
             }
 
-            // TODO: Save job to Database
             var createJobResult = _jobService.CreateJob(job.Value);
 
             return createJobResult.Match(
@@ -43,6 +41,16 @@ namespace TowbyJobs.Controllers
 
             return getJobResult.Match(
                 job => Ok(MapJobResponse(job)),
+                errors => Problem(errors));
+        }
+
+        [HttpGet("getJobs/{count:int}")]
+        public IActionResult GetJobList(int count)
+        {
+            var getJobResult = _jobService.GetJobs(count);
+
+            return getJobResult.Match(
+                jobs => Ok(MapJobListResponse(jobs)),
                 errors => Problem(errors));
         }
 
@@ -84,14 +92,35 @@ namespace TowbyJobs.Controllers
         {
             return new JobResponse(
                             job.Job_Id,
-                            job.Company.Name,
+                            job.Company_Id,
                             job.Title,
                             job.Contact,
                             job.URL,
-                            "inProgress",
+                            job.ApplicationStatus,
                             DateTime.Today,
                             DateTime.UtcNow
                             );
+        }
+        private static List<JobResponse> MapJobListResponse(List<Job> jobs)
+        {
+            List<JobResponse> responses = new List<JobResponse>();
+
+            foreach (var job in jobs)
+            {
+                responses.Add(
+                    new JobResponse(
+                            job.Job_Id,
+                            job.Company_Id,
+                            job.Title,
+                            job.Contact,
+                            job.URL,
+                            job.ApplicationStatus,
+                            DateTime.Today,
+                            DateTime.UtcNow
+                            ));
+            }
+
+            return responses;
         }
 
         private static ErrorOr<Job> MapJob(CreateJobRequest request, int id)

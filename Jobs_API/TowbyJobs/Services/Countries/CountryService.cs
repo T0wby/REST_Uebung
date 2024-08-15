@@ -34,6 +34,19 @@ namespace TowbyJobs.Services.Countries
             return Result.Deleted;
         }
 
+        public ErrorOr<List<Country>> GetCountries(int number)
+        {
+            if (number <= 0)
+            {
+                return Errors.Country.OutOfScope;
+            }
+
+            if (number > _context.Countries.Count()) number = _context.Countries.Count();
+
+            var countries = _context.Countries.Take(number).ToList();
+            return countries;
+        }
+
         public ErrorOr<Country> GetCountry(int id)
         {
             var country = _context.Countries.Find(id);

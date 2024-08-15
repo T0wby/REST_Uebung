@@ -7,6 +7,7 @@ namespace TowbyJobs.Services.Cities
     {
         ErrorOr<Created> CreateCity(City city);
         ErrorOr<City> GetCity(int id);
+        ErrorOr<List<City>> GetCities(int number);
         ErrorOr<UpsertedCityResult> UpsertCity(City city);
         ErrorOr<Deleted> DeletCity(int id);
     }

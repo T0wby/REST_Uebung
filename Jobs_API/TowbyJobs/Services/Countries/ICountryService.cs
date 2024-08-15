@@ -7,6 +7,7 @@ namespace TowbyJobs.Services.Countries
     {
         ErrorOr<Created> CreateCountry(Country country);
         ErrorOr<Country> GetCountry(int id);
+        ErrorOr<List<Country>> GetCountries(int number);
         ErrorOr<UpsertedCountryResult> UpsertCountry(Country country);
         ErrorOr<Deleted> DeletCountry(int id);
     }

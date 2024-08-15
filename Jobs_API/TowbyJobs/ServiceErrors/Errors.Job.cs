@@ -12,6 +12,9 @@ namespace TowbyJobs.ServiceErrors
             public static Error NotFound => Error.NotFound(
                 code: "Job.NotFound",
                 description: "The searched Job does not exist!");
+            public static Error OutOfScope => Error.Forbidden(
+                code: "Job.OutOfScope",
+                description: "The entered Job count is to low !");
         }
         public static class Company
         {
@@ -21,6 +24,9 @@ namespace TowbyJobs.ServiceErrors
             public static Error NotFound => Error.NotFound(
                 code: "Company.NotFound",
                 description: "The searched Company does not exist!");
+            public static Error OutOfScope => Error.Forbidden(
+                code: "Company.OutOfScope",
+                description: "The entered Company count is to low!");
         }
         public static class City
         {
@@ -30,6 +36,9 @@ namespace TowbyJobs.ServiceErrors
             public static Error NotFound => Error.NotFound(
                 code: "City.NotFound",
                 description: "The searched City does not exist!");
+            public static Error OutOfScope => Error.Forbidden(
+                code: "City.OutOfScope",
+                description: "The entered City count is to low!");
         }
         public static class State
         {
@@ -39,6 +48,9 @@ namespace TowbyJobs.ServiceErrors
             public static Error NotFound => Error.NotFound(
                 code: "State.NotFound",
                 description: "The searched State does not exist!");
+            public static Error OutOfScope => Error.Forbidden(
+                code: "State.OutOfScope",
+                description: "The entered State count is to low!");
         }
         public static class Country
         {
@@ -48,6 +60,9 @@ namespace TowbyJobs.ServiceErrors
             public static Error NotFound => Error.NotFound(
                 code: "Country.NotFound",
                 description: "The searched Country does not exist!");
+            public static Error OutOfScope => Error.Forbidden(
+                code: "Country.OutOfScope",
+                description: "The entered Country count is to low!");
         }
     }
 }

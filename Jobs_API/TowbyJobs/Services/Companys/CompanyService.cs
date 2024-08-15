@@ -34,6 +34,19 @@ namespace TowbyJobs.Services.Companys
             return Result.Deleted;
         }
 
+        public ErrorOr<List<Company>> GetCompanies(int number)
+        {
+            if (number <= 0)
+            {
+                return Errors.Company.OutOfScope;
+            }
+
+            if (number > _context.Companies.Count()) number = _context.Companies.Count();
+
+            var companies = _context.Companies.Take(number).ToList();
+            return companies;
+        }
+
         public ErrorOr<Company> GetCompany(int id)
         {
             var company = _context.Companies.Find(id);

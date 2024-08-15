@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using TowbyJobs.Contracts.Company;
+using TowbyJobs.Contracts.Country;
 using TowbyJobs.Data;
 using TowbyJobs.Models;
 using TowbyJobs.Services.Companys;
@@ -40,6 +41,16 @@ namespace TowbyJobs.Controllers
 
             return getCompanyResult.Match(
                 company => Ok(MapCompanyResponse(company)),
+                errors => Problem(errors));
+        }
+
+        [HttpGet("getCompanies/{count:int}")]
+        public IActionResult GetCompanyList(int count)
+        {
+            var getCompanyResult = _companyService.GetCompanies(count);
+
+            return getCompanyResult.Match(
+                companies => Ok(MapCompanyListResponse(companies)),
                 errors => Problem(errors));
         }
 
@@ -89,8 +100,32 @@ namespace TowbyJobs.Controllers
                             company.State_Id,
                             company.Country_Id,
                             company.Phone,
-                            DateTime.UtcNow
+                            company.LastTimeUpdated
                             );
+        }
+
+        private static List<CompanyResponse> MapCompanyListResponse(List<Company> companies)
+        {
+            List<CompanyResponse> responses = new List<CompanyResponse>();
+
+            foreach (var company in companies)
+            {
+                responses.Add(
+                new CompanyResponse(
+                    company.Company_Id,
+                    company.Name,
+                    company.Email,
+                    company.Housenumber,
+                    company.Street,
+                    company.City_Id,
+                    company.State_Id,
+                    company.Country_Id,
+                    company.Phone,
+                    company.LastTimeUpdated
+                ));
+            }
+
+            return responses;
         }
 
         private static ErrorOr<Company> MapCompany(CreateCompanyRequest request, int id)

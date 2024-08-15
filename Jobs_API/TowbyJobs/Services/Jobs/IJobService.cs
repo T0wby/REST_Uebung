@@ -7,6 +7,7 @@ namespace TowbyJobs.Services.Jobs
     {
         ErrorOr<Created> CreateJob(Job job);
         ErrorOr<Job> GetJob(int id);
+        ErrorOr<List<Job>> GetJobs(int number);
         ErrorOr<UpsertedJobResult> UpsertJob(Job job);
         ErrorOr<Deleted> DeletJob(int id);
     }

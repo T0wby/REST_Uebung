@@ -40,6 +40,19 @@ namespace TowbyJobs.Services.States
             return state == null ? Errors.State.NotFound : state;
         }
 
+        public ErrorOr<List<State>> GetStates(int number)
+        {
+            if (number <= 0)
+            {
+                return Errors.State.OutOfScope;
+            }
+
+            if (number > _context.States.Count()) number = _context.States.Count();
+
+            var states = _context.States.Take(number).ToList();
+            return states;
+        }
+
         public ErrorOr<UpsertedStateResult> UpsertState(State state)
         {
             var tmp = _context.States.Find(state.State_Id);
