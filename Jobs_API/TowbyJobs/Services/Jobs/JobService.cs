@@ -36,7 +36,17 @@ namespace TowbyJobs.Services.Jobs
         public ErrorOr<Job> GetJob(int id)
         {
             var job = _context.Jobs.Find(id);
-            return job == null ? Errors.Job.NotFound : job;
+
+            if (job == null) return Errors.Job.NotFound;
+
+            var company = _context.Companies.Find(job.Company_Id);
+
+            if (company != null)
+            {
+                job.Company = company;
+            }
+
+            return job;
         }
 
         public ErrorOr<List<Job>> GetJobs(int number)
@@ -49,6 +59,18 @@ namespace TowbyJobs.Services.Jobs
             if(number > _context.Jobs.Count()) number = _context.Jobs.Count();
 
             var jobs = _context.Jobs.Take(number).ToList();
+
+            foreach (var job in jobs) 
+            {
+                if (job == null) continue;
+                var company = _context.Companies.Find(job.Company_Id);
+
+                if (company != null)
+                {
+                    job.Company = company;
+                }
+            }
+
             return jobs;
         }
 

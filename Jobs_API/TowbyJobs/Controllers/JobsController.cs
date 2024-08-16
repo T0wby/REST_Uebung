@@ -93,12 +93,13 @@ namespace TowbyJobs.Controllers
             return new JobResponse(
                             job.Job_Id,
                             job.Company_Id,
+                            job.Company != null ? job.Company.Name : string.Empty,
                             job.Title,
-                            job.Contact,
                             job.URL,
+                            job.Contact,
                             job.ApplicationStatus,
-                            DateTime.Today,
-                            DateTime.UtcNow
+                            job.DateOfApplication,
+                            job.LastTimeUpdated
                             );
         }
         private static List<JobResponse> MapJobListResponse(List<Job> jobs)
@@ -111,12 +112,13 @@ namespace TowbyJobs.Controllers
                     new JobResponse(
                             job.Job_Id,
                             job.Company_Id,
+                            job.Company != null ? job.Company.Name : string.Empty,
                             job.Title,
-                            job.Contact,
                             job.URL,
+                            job.Contact,
                             job.ApplicationStatus,
-                            DateTime.Today,
-                            DateTime.UtcNow
+                            job.DateOfApplication,
+                            job.LastTimeUpdated
                             ));
             }
 
